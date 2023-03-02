@@ -10,10 +10,9 @@ export const createUser = async (req, res) => {
     },
   });
 
-  res.status(200);
-  res.json({ message: `User successfully created.` });
+  const token = createJWT(user);
+  res.json({ token });
   return
-
 };
 
 export const signin = async (req, res) => {
@@ -37,7 +36,4 @@ export const signin = async (req, res) => {
   const token = createJWT(user);
   res.json({ token });
   return
-  // res.status(200);
-  // res.json({ message: `Successfully signin` });
-  // return
 };
