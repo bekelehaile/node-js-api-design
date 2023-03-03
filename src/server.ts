@@ -12,18 +12,18 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res)=>{
-  throw new Error("nop")
-})
+app.get("/", (req, res) => {
+  res.json({ message: "hello" });
+});
 
 app.use("/api", protect, router);
 
 app.post("/user", createUser);
-app.post("/signin", signin)
+app.post("/signin", signin);
 
-app.use((err, req, res, next)=>{
-  console.log(err)
-  res.json({message:`Something went wrong ${err.message}`})
-})
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.json({ message: `Something went wrong ${err.message}` });
+});
 
 export default app;

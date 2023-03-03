@@ -3,20 +3,20 @@ import prisma from "../db";
 import { comparePassword, createJWT, hashPassword } from "../modules/auth";
 
 export const createUser = async (req, res, next) => {
- try {
-  const user = await prisma.user.create({
-    data: {
-      username: req.body.username,
-      password: await hashPassword(req.body.password),
-    },
-  });
+  try {
+    const user = await prisma.user.create({
+      data: {
+        username: req.body.username,
+        password: await hashPassword(req.body.password),
+      },
+    });
 
-  const token = createJWT(user);
-  res.json({ token });
-  return
- } catch (error) {
-  next(error)
- }
+    const token = createJWT(user);
+    res.json({ token });
+    return;
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const signin = async (req, res, next) => {
@@ -37,11 +37,11 @@ export const signin = async (req, res, next) => {
       res.json({ message: `username or password error` });
       return;
     }
-    
+
     const token = createJWT(user);
     res.json({ token });
-    return
+    return;
   } catch (error) {
-    next(error)
+    next(error);
   }
 };

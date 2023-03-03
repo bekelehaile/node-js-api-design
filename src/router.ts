@@ -1,4 +1,4 @@
-import { UPDATE_STATUSES } from "@prisma/client";
+import UPDATE_STATUSES from "@prisma/client";
 import { Router } from "express";
 import { body, oneOf, param, validationResult } from "express-validator";
 
@@ -47,7 +47,7 @@ router.post(
   "/updates",
   body("title").optional().isString(),
   body("body").optional().isString(),
-  // body("status").isIn([UPDATE_STATUSES]).isString(),
+  body("status").isIn([UPDATE_STATUSES]).isString(),
   body("asset").optional().isString(),
   body("version").optional().isString(),
   body("productId").isString(),
@@ -58,7 +58,7 @@ router.put(
   "/updates/:id",
   body("title").optional().isString(),
   body("body").optional().isString(),
-  // body("status").isIn([UPDATE_STATUSES]).isString(),
+  body("status").isIn([UPDATE_STATUSES]).isString(),
   body("productId").isString(),
   handlerInputErrors,
   updateUpdate
